@@ -78,8 +78,6 @@
 				JbnButtons[i] = new JButton(String.valueOf(i));
 			}
 
-
-			// Create operator Jbuttons
 			JbnButtons[10] = new JButton("+/-");
 			JbnButtons[11] = new JButton(".");
 			JbnButtons[12] = new JButton("=");
@@ -87,7 +85,7 @@
 			JbnButtons[14] = new JButton("*");
 			JbnButtons[15] = new JButton("-");
 			JbnButtons[16] = new JButton("+");
-			JbnButtons[17] = new JButton("sqrt");
+			JbnButtons[17] = new JButton("√");
 			JbnButtons[18] = new JButton("1/x");
 			JbnButtons[19] = new JButton("%");
 			jplBackSpace = new JPanel();
@@ -103,10 +101,10 @@
 			JbnButtons[25] = new JButton("tan");
 			JbnButtons[26] = new JButton("ln");
 			JbnButtons[27] = new JButton("exp");
-			JbnButtons[28] = new JButton("abs");
+			JbnButtons[28] = new JButton("oct");
 			JbnButtons[29] = new JButton("hex");
 			JbnButtons[30] = new JButton("bin");
-			JbnButtons[31] = new JButton("%");
+			JbnButtons[31] = new JButton("^");
 			jplControl.add(JbnButtons[23]);
 			jplControl.add(JbnButtons[21]);
 			jplControl.add(JbnButtons[22]);
@@ -177,14 +175,19 @@
 			// TODO Auto-generated method stub
 			String resultStr;
 			String str = String.valueOf(e.getActionCommand());
+			System.out.println("num 1" + numStr1);
+			System.out.println("OP" + str.charAt(0));
 			char ch = str.charAt(0);
 
-			if(str.equals("hex") || str.equals("ln") || str.equals("e") || str.equals("cos")||str.equals("sin") ||str.equals("tan") ||str.equals("abs") ||str.equals("bin")){
+			if(str.equals("hex") || str.equals("ln") || str.equals("exp") || str.equals("cos")||str.equals("sin") ||str.equals("tan") ||str.equals("oct") ||str.equals("bin")){
 				jLabelOuput.setText(e.getActionCommand() + "(" + numStr1 + ")"  );
 				op = e.getActionCommand().charAt(0);
+
+
 			}
 			switch(ch)
 			{
+
 				case '0': case '1': case '2':
 				case '3': case '4': case '5':
 				case '6': case '7': case '8':
@@ -200,7 +203,8 @@
 				}
 					break;
 				case '+': case '-': case '*':                       //Step 4b
-				case '/': case '%' : op = ch;
+				case '/': case '%' : case '^':
+				case '√' : op = ch;
 					firstInput = false;
 					break;
 				case '=': resultStr = evaluate();                   //Step 4c
@@ -230,7 +234,9 @@
 				case 's': resultat = Math.sin(Double.parseDouble(numStr1));break;
 				case 'c': resultat = Math.cos(Double.parseDouble(numStr1));break;
 				case 't': resultat = Math.tan(Double.parseDouble(numStr1));break;
-				case 'a': resultat = Math.abs(Double.parseDouble(numStr1));break;
+				case '√': resultat = Math.sqrt(Double.parseDouble(numStr1));break;
+				case '^': resultat = Math.pow(Integer.parseInt(numStr1),Integer.parseInt(numStr2));break;
+				case 'o': resultat = Integer.parseInt(numStr1,8);break;
 				case '/': resultat = Integer.parseInt(numStr1) / Integer.parseInt(numStr2);break;
 				case '%': resultat = Integer.parseInt(numStr1) % Integer.parseInt(numStr2); break;
 			}
